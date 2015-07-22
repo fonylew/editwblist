@@ -1,39 +1,21 @@
 <html>
 	<head>
 		<title>Insert W/B list!</title>
-	<style>
-		a{
-			text-decoration: none;	
-			color: 0000FF;
-		}		
-		body{
-			color: #333333;
-			font-family: Century Gothic, sans-serif;
-			margin-left: 3em;
-		}
-input {
-    display: block;
-	margin-bottom: 0.25em;
-}
-
-label {
-    float: left;
-    margin-right: 0.5em;
-} 
-	</style>
+		<meta name="viewport" content="width=500"/>
+<link rel="stylesheet" type="text/css" href="table.css">
 	</head>
 	<body>
 	<form action="submit.php" method="post">
 		<label>Recipient Email : </label>
 		<input type="text" name="r_email" placeholder="recipient@example.com">
 		<br>
-		<label>Sender Email : </label>
+		<label>Sender Email &nbsp;&nbsp;&nbsp;&nbsp;: </label>
 		<input type="text" name="s_email" placeholder="sender@example.com">
 		<br>
-		<label>Type : </label>
+		<label>Type : &#8195;</label>
 		<input type="radio" name="type" value="b" checked="checked">(b) blacklist
 		<input type="radio" name="type" value="w">(w) whitelist
-		<input type="submit" value="Submit">
+		<input type="submit" class="button" value="Submit">
 	</form>
 		<?php
 	include('connection.php');
@@ -66,7 +48,7 @@ label {
 	$resultinswb= $db->query($sqlinswb);
 	$uni = "▼";
 	if ($resultinswb->num_rows > 0) {
-     	echo "<table><tr><th>recipient<a href=\"index.php?wborder=1\">".$uni."</a></th><th>sender<a href=\"index.php?wborder=2\">".$uni."</a></th><th>wb<a href=\"index.php?wborder=3\">".$uni."</a></th></tr>";
+     	echo "<table><tr><th>recipient<a href=\"index.php?wborder=1\">".$uni."</a></th><th>sender<a href=\"index.php?wborder=2\">".$uni."</a></th><th>wb<a href=\"index.php?wborder=3\">".$uni."</a></th><th></th></tr>";
      	while($row = $resultinswb->fetch_assoc()) {
          	echo "<tr><td>" . $row["r_email"]. "</td><td>" . $row["s_email"]. "</td><td>".$row["wb"]."</td><td><a href=\"delete.php?rid=".$row["rid"]."&sid=".$row["sid"]."\">delete</a></td></tr>"; 
      	}
